@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  gradio:
+    # image: gosgradio/gradio
+    build: .
+    container_name: gradio_api
+    environment:
+      DATABASE.HOST: db
+      DATABASE.DB_NAME: gradio
+      DATABASE.PASSWORD: password
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # - ~/config:/etc/gradio
+    restart: always
+
+  db:
+    image: postgres:alpine
+    container_name: gradio_db
+    ports:
+      - "4000:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: gradio
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data: {}

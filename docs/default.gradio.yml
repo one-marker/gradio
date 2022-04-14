@@ -1,0 +1,14 @@
+database:
+  db_name: gradio
+  debug: true
+  host: db
+  password: password
+  port: 5432
+  sslmode: disable
+  user: postgres
+  sslrootcert: # CERT
+external_host: vuc.evlentev.ru # Доменное имя на которое ссылается приложение (поменять)
+external_schema: http
+listen_port: 3000
+registry:
+  image: gosgradio/gradio
